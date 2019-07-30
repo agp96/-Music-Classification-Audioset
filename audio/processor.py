@@ -76,14 +76,11 @@ class WavProcessor(object):
         self._youtube_sess = sess
 
     def _init_class_map(self):
-	val = 0
         with open(params.CLASS_LABELS_INDICES) as f:
             next(f)  # skip header
-            reader = csv.reader(f)¡
+            reader = csv.reader(f)
             for row in reader:
-		val = val+1
-		if i < 526:
-		  self._class_map[int(row[0])] = row[2]
+                self._class_map[int(row[0])] = row[2]
 				
     def get_predictions(self, sample_rate, data):
         samples = data / 32768.0  # Convert to [-1.0, +1.0]
