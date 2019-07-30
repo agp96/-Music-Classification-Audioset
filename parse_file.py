@@ -24,6 +24,8 @@ flags.DEFINE_integer("second_class", 282, "Second class of the dataset to evalua
   
 parser = argparse.ArgumentParser(description='Read file and process audio')
 parser.add_argument('wav_file', type=str, help='File to read and process')
+parser.add_argument('--first_class', type=int, default=276, metavar='CLASS', help='Minimum label class.')
+parser.add_argument('--second_class', type=int, default=282, metavar='CLASS', help='Maximum label class.')
 
 
 def process_file(wav_file):
@@ -35,7 +37,7 @@ def process_file(wav_file):
     from audio.processor import WavProcessor, format_predictions
 
     with WavProcessor() as proc:
-        predictions = proc.get_predictions(sr, data, FLAGS.first_class, FLAGS.second_class)
+        predictions = proc.get_predictions(sr, data, first_class, second_class)
 
     print(format_predictions(predictions))
 
