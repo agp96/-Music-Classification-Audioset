@@ -111,7 +111,7 @@ class WavProcessor(object):
         print(len(predictions[0]))
         print(count)
         print(hit)
-        print(top_indices)
+        #print(top_indices)
         print(top_mood)
 		
         top_indices = np.argpartition(predictions[0], -count)[-count:]
