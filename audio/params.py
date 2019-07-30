@@ -53,5 +53,5 @@ YOUTUBE_CHECKPOINT_FILE = 'models/youtube_model.ckpt'
 CLASS_LABELS_INDICES = 'models/class_labels_indices.csv'
 
 # Predictions filter
-PREDICTIONS_COUNT_LIMIT = 20
+PREDICTIONS_COUNT_LIMIT = 7
 PREDICTIONS_HIT_LIMIT = 0.1
