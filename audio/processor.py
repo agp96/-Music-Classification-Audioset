@@ -111,6 +111,7 @@ class WavProcessor(object):
         print(len(predictions[0]))
         print(len(top_indices))
         print(len(self._class_map))
+        print(self._class_map[275])
         print(self._class_map[276])
         print(self._class_map[277])
         print(self._class_map[278])
