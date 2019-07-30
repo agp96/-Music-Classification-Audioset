@@ -24,13 +24,14 @@ flags.DEFINE_integer("second_class", 282, "Second class of the dataset to evalua
   
 parser = argparse.ArgumentParser(description='Read file and process audio')
 parser.add_argument('wav_file', type=str, help='File to read and process')
+parser.add_argument('--ten_seconds', type=bool, default=False, metavar='LIMIT_SECONDS', help='A label for each 10 seconds of the wav.')
 parser.add_argument('--total_predictions', type=int, default=7, metavar='PREDICTIONS', help='Number of predictions.')
 parser.add_argument('--threshold', type=float, default=0.1, metavar='THRESHOLD', help='Threshold to discard tags.')
 parser.add_argument('--first_class', type=int, default=276, metavar='CLASS', help='Minimum label class.')
 parser.add_argument('--second_class', type=int, default=282, metavar='CLASS', help='Maximum label class.')
 
 
-def process_file(wav_file, total_predictions, threshold, first_class, second_class):
+def process_file(wav_file, ten_seconds, total_predictions, threshold, first_class, second_class):
     sr, data = wavfile.read(wav_file)
     if data.dtype != np.int16:
         raise TypeError('Bad sample type: %r' % data.dtype)
@@ -39,9 +40,16 @@ def process_file(wav_file, total_predictions, threshold, first_class, second_cla
     from audio.processor import WavProcessor, format_predictions
 
     with WavProcessor() as proc:
-        predictions = proc.get_predictions(sr, data, total_predictions, threshold, first_class, second_class)
+        if ten_seconds == False:
+	      predictions = proc.get_predictions(sr, data, total_predictions, threshold, first_class, second_class)
+	      print(format_predictions(predictions))
+        else:
+          predictions = proc.get_predictions2(sr, data, total_predictions, threshold, first_class, second_class)
+		  
+	      for i in range(0, len(predictions)):
+	        print(format_predictions(predictions[i]))
 
-    print(format_predictions(predictions))
+    
 
 
 if __name__ == '__main__':
