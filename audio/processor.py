@@ -98,14 +98,14 @@ class WavProcessor(object):
         hit = params.PREDICTIONS_HIT_LIMIT
 
         top_indices = np.argpartition(predictions[0], -count)[-count:]
-        print(predictions)
+        #print(predictions)
         print(predictions[0][276])
         print(predictions[0][277])
         print(predictions[0][278])
         print(predictions[0][279])
         print(predictions[0][280])
         print(predictions[0][281])
-        print(predictions[0][282])
+        print(predictions[0][474])
         print(len(predictions[0]))
         print(len(top_indices))
         print(len(self._class_map))
