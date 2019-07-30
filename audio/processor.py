@@ -82,19 +82,17 @@ class WavProcessor(object):
             reader = csv.reader(f)
             for row in reader:
                 samples = samples+1
-                if samples > 276:
-                  if samples < 284:
                     self._class_map[int(row[0])] = row[2]
 				
-    def get_predictions(self, sample_rate, data):
+    def get_predictions(self, sample_rate, data, first_class, second_class):
         samples = data / 32768.0  # Convert to [-1.0, +1.0]
         examples_batch = vggish.input.waveform_to_examples(samples, sample_rate)
         features = self._get_features(examples_batch)
         predictions = self._process_features(features)
-        predictions = self._filter_predictions(predictions)
+        predictions = self._filter_predictions(predictions, first_class, second_class)
         return predictions
 
-    def _filter_predictions(self, predictions):
+    def _filter_predictions(self, predictions, first_class, second_class):
         count = params.PREDICTIONS_COUNT_LIMIT
         hit = params.PREDICTIONS_HIT_LIMIT
 
@@ -103,9 +101,9 @@ class WavProcessor(object):
         #print(predictions)
         total_mood = 0
 		
-        for j in range(276, 282):
+        for j in range(first_class, second_class):
           total_mood = total_mood + predictions[0][j]
-        for j in range(276, 282):
+        for j in range(first_class, second_class):
           predictions[0][j] = predictions[0][j] / total_mood
         #print(predictions[0][276])
         #print(predictions[0][277])

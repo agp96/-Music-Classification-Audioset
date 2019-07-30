@@ -16,6 +16,11 @@ import argparse
 import numpy as np
 from scipy.io import wavfile
 
+FLAGS = flags.FLAGS
+
+flags.DEFINE_integer("first_class", 276, "First class of the dataset to evaluate.")
+flags.DEFINE_integer("second_class", 282, "Second class of the dataset to evaluate.")
+  
 parser = argparse.ArgumentParser(description='Read file and process audio')
 parser.add_argument('wav_file', type=str, help='File to read and process')
 
@@ -29,7 +34,7 @@ def process_file(wav_file):
     from audio.processor import WavProcessor, format_predictions
 
     with WavProcessor() as proc:
-        predictions = proc.get_predictions(sr, data)
+        predictions = proc.get_predictions(sr, data, FLAGS.first_class, FLAGS.second_class)
 
     print(format_predictions(predictions))
 
