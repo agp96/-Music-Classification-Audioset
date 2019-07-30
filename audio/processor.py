@@ -85,7 +85,6 @@ class WavProcessor(object):
 				if i < 526:
 					self._class_map[int(row[0])] = row[2]
 				
-
     def get_predictions(self, sample_rate, data):
         samples = data / 32768.0  # Convert to [-1.0, +1.0]
         examples_batch = vggish.input.waveform_to_examples(samples, sample_rate)
