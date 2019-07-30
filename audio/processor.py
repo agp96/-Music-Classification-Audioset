@@ -124,9 +124,9 @@ class WavProcessor(object):
         #print(self._class_map[280])
         #print(self._class_map[281])
         #print(self._class_map[282])
-        print(count)
-        print(hit)
-        print(top_indices)
+        print('Total predicciones ' + str(count))
+        print('Umbral de corte ' + str(hit))
+        #print(top_indices)
 		
         line = ((self._class_map[i], float(predictions[0][i])) for
                 i in top_mood if predictions[0][i] > hit)
