@@ -76,6 +76,7 @@ class WavProcessor(object):
         self._youtube_sess = sess
 
     def _init_class_map(self):
+        samples = 0  # Convert to [-1.0, +1.0]
         with open(params.CLASS_LABELS_INDICES) as f:
             next(f)  # skip header
             reader = csv.reader(f)
