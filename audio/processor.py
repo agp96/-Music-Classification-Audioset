@@ -35,7 +35,6 @@ class WavProcessor(object):
     _class_map = {}
     _vggish_sess = None
     _youtube_sess = None
-    _top = np.array[276, 277, 278, 279, 280, 281, 282]
 
     def __init__(self):
         pca_params = np.load(params.VGGISH_PCA_PARAMS)
@@ -98,7 +97,8 @@ class WavProcessor(object):
         count = params.PREDICTIONS_COUNT_LIMIT
         hit = params.PREDICTIONS_HIT_LIMIT
 
-        top_indices = np.argpartition(predictions[0], -count)[-count:]¡
+        top_indices = np.argpartition(predictions[0], -count)[-count:]
+        top_mood = np.array[276, 277, 278, 279, 280, 281, 282]
         print(predictions)
         print(predictions[0][276])
         print(predictions[0][277])
@@ -113,7 +113,7 @@ class WavProcessor(object):
         print(top_indices)
 		
         line = ((self._class_map[i], float(predictions[0][i])) for
-                i in self.top if predictions[0][i] > hit)
+                i in top if predictions[0][i] > hit)
         return sorted(line, key=lambda p: -p[1])
 
     def _process_features(self, features):
