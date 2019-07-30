@@ -101,8 +101,12 @@ class WavProcessor(object):
         top_indices = np.argpartition(predictions[0], -count)[-count:]
         top_mood = np.array([276, 277, 278, 279, 280, 281, 282])
         #print(predictions)
+        total_mood = 0
+		
         for j in range(276, 282):
-          predictions[0][j] = predictions[0][j]*1000000000000
+          total_mood = total_mood + predictions[0][j]
+        for j in range(276, 282):
+          predictions[0][j] = predictions[0][j] / total_mood
         print(predictions[0][276])
         print(predictions[0][277])
         print(predictions[0][278])
