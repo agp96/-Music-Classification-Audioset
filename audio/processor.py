@@ -111,9 +111,10 @@ class WavProcessor(object):
         print(count)
         print(hit)
         print(top_indices)
+        print(top_mood)
 		
         line = ((self._class_map[i], float(predictions[0][i])) for
-                i in top if predictions[0][i] > hit)
+                i in top_mood if predictions[0][i] > hit)
         return sorted(line, key=lambda p: -p[1])
 
     def _process_features(self, features):
