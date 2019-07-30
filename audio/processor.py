@@ -90,9 +90,11 @@ class WavProcessor(object):
         print(samples)
         print(sample_rate)
         if len(samples) / 44100 < 10:
-		  examples_batch = vggish.input.waveform_to_examples(samples, sample_rate)
-		  features = self._get_features(examples_batch)
-		  predictions = self._process_features(features)
+            examples_batch = vggish.input.waveform_to_examples(samples, sample_rate)
+            features = self._get_features(examples_batch)
+		examples_batch = vggish.input.waveform_to_examples(samples, sample_rate)
+		features = self._get_features(examples_batch)
+		predictions = self._process_features(features)
 		  predictions = self._filter_predictions(predictions, total_predictions, threshold, first_class, second_class)
         else:
 		  num_examples = len(samples) / 44100
