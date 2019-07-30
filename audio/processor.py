@@ -118,8 +118,8 @@ class WavProcessor(object):
         print(count)
         print(hit)
         print(top_indices)
-		for i in top_indices if predictions[0][i] > hit:
-          line = ((self._class_map[i], float(predictions[0][i]))
+        for i in top_indices if predictions[0][i] > hit:
+          line = (self._class_map[i], float(predictions[0][i])
         print(line)
         line = ((self._class_map[i], float(predictions[0][i])) for
                 i in top_indices if predictions[0][i] > hit)
