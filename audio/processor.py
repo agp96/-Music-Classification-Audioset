@@ -106,6 +106,7 @@ class WavProcessor(object):
         print(predictions[0][280])
         print(predictions[0][281])
         print(predictions[0][282])
+        print(len(predictions[0]))
         print(count)
         print(hit)
         print(top_indices)
