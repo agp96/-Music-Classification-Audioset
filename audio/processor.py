@@ -98,6 +98,7 @@ class WavProcessor(object):
         hit = params.PREDICTIONS_HIT_LIMIT
 
         top_indices = np.argpartition(predictions[0], -count)[-count:]
+        top = np.array[276, 277, 278, 279, 280, 281, 282]
         print(predictions)
         print(predictions[0][276])
         print(predictions[0][277])
@@ -112,7 +113,7 @@ class WavProcessor(object):
         print(top_indices)
 		
         line = ((self._class_map[i], float(predictions[0][i])) for
-                i in top_indices if predictions[0][i] > hit)
+                i in top if predictions[0][i] > hit)
         return sorted(line, key=lambda p: -p[1])
 
     def _process_features(self, features):
