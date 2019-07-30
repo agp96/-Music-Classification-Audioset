@@ -24,7 +24,7 @@ flags.DEFINE_integer("second_class", 282, "Second class of the dataset to evalua
   
 parser = argparse.ArgumentParser(description='Read file and process audio')
 parser.add_argument('wav_file', type=str, help='File to read and process')
-parser.add_argument('--total_predictions', type=int, default=7, metavar='CLASSES', help='Number of classes.')
+parser.add_argument('--total_predictions', type=int, default=7, metavar='PREDICTIONS', help='Number of predictions.')
 parser.add_argument('--threshold', type=float, default=0.1, metavar='THRESHOLD', help='Threshold to discard tags.')
 parser.add_argument('--first_class', type=int, default=276, metavar='CLASS', help='Minimum label class.')
 parser.add_argument('--second_class', type=int, default=282, metavar='CLASS', help='Maximum label class.')
