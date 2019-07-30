@@ -79,8 +79,12 @@ class WavProcessor(object):
         with open(params.CLASS_LABELS_INDICES) as f:
             next(f)  # skip header
             reader = csv.reader(f)
-            for row in range(0,526):
-                self._class_map[int(row[0])] = row[2]
+			i = 0
+            for row in reader:
+				i = i+1
+				if i < 526:
+					self._class_map[int(row[0])] = row[2]
+				
 
     def get_predictions(self, sample_rate, data):
         samples = data / 32768.0  # Convert to [-1.0, +1.0]
