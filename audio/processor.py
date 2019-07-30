@@ -76,16 +76,17 @@ class WavProcessor(object):
         self._youtube_sess = sess
 
     def _init_class_map(self):
-        samples = 0  # Convert to [-1.0, +1.0]
         with open(params.CLASS_LABELS_INDICES) as f:
             next(f)  # skip header
             reader = csv.reader(f)
             for row in reader:
-                samples = samples+1
                 self._class_map[int(row[0])] = row[2]
 				
     def get_predictions(self, sample_rate, data, total_predictions, threshold, first_class, second_class):
         samples = data / 32768.0  # Convert to [-1.0, +1.0]
+        print(data)
+        print(samples)
+        print(sample_rate)
         examples_batch = vggish.input.waveform_to_examples(samples, sample_rate)
         features = self._get_features(examples_batch)
         predictions = self._process_features(features)
