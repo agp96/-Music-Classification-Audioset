@@ -99,6 +99,13 @@ class WavProcessor(object):
 
         top_indices = np.argpartition(predictions[0], -count)[-count:]
         print(predictions)
+        print(predictions[276])
+        print(predictions[277])
+        print(predictions[278])
+        print(predictions[279])
+        print(predictions[280])
+        print(predictions[281])
+        print(predictions[282])
         print(count)
         print(hit)
         print(top_indices)
