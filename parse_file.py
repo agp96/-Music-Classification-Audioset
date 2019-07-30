@@ -28,7 +28,7 @@ parser.add_argument('--first_class', type=int, default=276, metavar='CLASS', hel
 parser.add_argument('--second_class', type=int, default=282, metavar='CLASS', help='Maximum label class.')
 
 
-def process_file(wav_file):
+def process_file(wav_file, first_class, second_class):
     sr, data = wavfile.read(wav_file)
     if data.dtype != np.int16:
         raise TypeError('Bad sample type: %r' % data.dtype)
