@@ -82,7 +82,7 @@ class WavProcessor(object):
             reader = csv.reader(f)
             for row in reader:
                 samples = samples+1
-                if samples < row[2]:
+                if samples < 526:
                   self._class_map[int(row[0])] = row[2]
 				
     def get_predictions(self, sample_rate, data):
