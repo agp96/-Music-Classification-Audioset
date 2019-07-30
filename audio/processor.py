@@ -84,7 +84,9 @@ class WavProcessor(object):
 				
     def get_predictions(self, sample_rate, data, total_predictions, threshold, first_class, second_class):
         samples = data / 32768.0  # Convert to [-1.0, +1.0]
+        print(len(data))
         print(data)
+        print(len(samples))
         print(samples)
         print(sample_rate)
         examples_batch = vggish.input.waveform_to_examples(samples, sample_rate)
