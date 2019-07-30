@@ -41,9 +41,8 @@ def process_file(wav_file, ten_seconds, total_predictions, threshold, first_clas
 
     with WavProcessor() as proc:
         if ten_seconds == False:
-          if ten_seconds == False:
-		  predictions = proc.get_predictions(sr, data, total_predictions, threshold, first_class, second_class)
-			print(format_predictions(predictions))
+          predictions = proc.get_predictions(sr, data, total_predictions, threshold, first_class, second_class)
+          print(format_predictions(predictions))
 			
         else:
 		  for i in range(0,int(num_examples/10)):
