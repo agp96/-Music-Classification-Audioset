@@ -98,7 +98,6 @@ class WavProcessor(object):
         else:
             num_examples = len(samples) / 44100
             num_10s = 44100
-            predictions = self._process_features(features)
             for i in range(0,int(num_examples/10)):
                 num_10s = num_10s*i+1
                 self._class_map[int(row[0])] = row[2]
