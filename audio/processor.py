@@ -116,6 +116,9 @@ class WavProcessor(object):
         input_tensor = sess.graph.get_collection("input_batch_raw")[0]
         num_frames_tensor = sess.graph.get_collection("num_frames")[0]
         predictions_tensor = sess.graph.get_collection("predictions")[0]
+        print(data)
+        print(input_tensor)
+        print(predictions_tensor)
 
         predictions_val, = sess.run(
             [predictions_tensor],
