@@ -107,30 +107,30 @@ class WavProcessor(object):
           total_mood = total_mood + predictions[0][j]
         for j in range(276, 282):
           predictions[0][j] = predictions[0][j] / total_mood
-        print(predictions[0][276])
-        print(predictions[0][277])
-        print(predictions[0][278])
-        print(predictions[0][279])
-        print(predictions[0][280])
-        print(predictions[0][281])
-        print(predictions[0][474])
-        print(len(predictions[0]))
-        print(len(top_indices))
-        print(len(self._class_map))
-        print(self._class_map[276])
-        print(self._class_map[277])
-        print(self._class_map[278])
-        print(self._class_map[279])
-        print(self._class_map[280])
-        print(self._class_map[281])
-        print(self._class_map[282])
+        #print(predictions[0][276])
+        #print(predictions[0][277])
+        #print(predictions[0][278])
+        #print(predictions[0][279])
+        #print(predictions[0][280])
+        #print(predictions[0][281])
+        #print(predictions[0][474])
+        #print(len(predictions[0]))
+        #print(len(top_indices))
+        #print(len(self._class_map))
+        #print(self._class_map[276])
+        #print(self._class_map[277])
+        #print(self._class_map[278])
+        #print(self._class_map[279])
+        #print(self._class_map[280])
+        #print(self._class_map[281])
+        #print(self._class_map[282])
         print(count)
         print(hit)
         print(top_indices)
 		
         line = ((self._class_map[i], float(predictions[0][i])) for
                 i in top_mood if predictions[0][i] > hit)
-        print(hit)
+        #print(hit)
         return sorted(line, key=lambda p: -p[1])
 
     def _process_features(self, features):
@@ -143,9 +143,9 @@ class WavProcessor(object):
         input_tensor = sess.graph.get_collection("input_batch_raw")[0]
         num_frames_tensor = sess.graph.get_collection("num_frames")[0]
         predictions_tensor = sess.graph.get_collection("predictions")[0]
-        print(data)
-        print(input_tensor)
-        print(predictions_tensor)
+        #print(data)
+        #print(input_tensor)
+        #print(predictions_tensor)
 
         predictions_val, = sess.run(
             [predictions_tensor],
