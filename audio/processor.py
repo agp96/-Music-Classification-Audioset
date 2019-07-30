@@ -91,6 +91,7 @@ class WavProcessor(object):
         features = self._get_features(examples_batch)
         predictions = self._process_features(features)
         predictions = self._filter_predictions(predictions)
+        print(predictions)
         return predictions
 
     def _filter_predictions(self, predictions):
@@ -114,7 +115,7 @@ class WavProcessor(object):
         print(top_mood)
 		
         line = ((self._class_map[i], float(predictions[0][i])) for
-                i in top_mood)
+                i in top_indices if predictions[0][i] > hit)
         return sorted(line, key=lambda p: -p[1])
 
     def _process_features(self, features):
