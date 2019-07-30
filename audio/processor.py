@@ -89,10 +89,11 @@ class WavProcessor(object):
         print(len(samples))
         print(samples)
         print(sample_rate)
-		examples_batch = vggish.input.waveform_to_examples(samples, sample_rate)
-		features = self._get_features(examples_batch)
-		predictions = self._process_features(features)
-		predictions = self._filter_predictions(predictions, total_predictions, threshold, first_class, second_class)
+		
+        examples_batch = vggish.input.waveform_to_examples(samples, sample_rate)
+        features = self._get_features(examples_batch)
+        predictions = self._process_features(features)
+        predictions = self._filter_predictions(predictions, total_predictions, threshold, first_class, second_class)
 		
         return predictions
 		
@@ -104,22 +105,22 @@ class WavProcessor(object):
         print(samples)
         print(sample_rate)
 		
-		num_examples = len(samples) / 44100
-		num_10s = 44100
-		for i in range(0,int(num_examples/10)):
-			num_10s = num_10s*(i+1)
-			samples_10seconds = samples[44100*i:num_10s]
-			examples_batch[i] = vggish.input.waveform_to_examples(samples_10seconds, sample_rate)
-			features[i] = self._get_features(examples_batch[i])
-			predictions[i] = self._process_features(features[i])
-			predictions[i] = self._filter_predictions(predictions[i], total_predictions, threshold, first_class, second_class)
-			if i == int(num_examples/10):
-			  samples_10seconds = samples[num_10s:len(samples)]
-			  examples_batch[i] = vggish.input.waveform_to_examples(samples_10seconds, sample_rate)
-			  features[i] = self._get_features(examples_batch[i])
-			  predictions[i] = self._process_features(features[i])
-			  predictions[i] = self._filter_predictions(predictions[i], total_predictions, threshold, first_class, second_class)
-			  
+        num_examples = len(samples) / 44100
+        num_10s = 44100
+        for i in range(0,int(num_examples/10)):
+          num_10s = num_10s*(i+1)
+          samples_10seconds = samples[44100*i:num_10s]
+          examples_batch[i] = vggish.input.waveform_to_examples(samples_10seconds, sample_rate)
+          features[i] = self._get_features(examples_batch[i])
+          predictions[i] = self._process_features(features[i])
+          predictions[i] = self._filter_predictions(predictions[i], total_predictions, threshold, first_class, second_class)
+          if i == int(num_examples/10):
+            samples_10seconds = samples[num_10s:len(samples)]
+            examples_batch[i] = vggish.input.waveform_to_examples(samples_10seconds, sample_rate)
+            features[i] = self._get_features(examples_batch[i])
+            predictions[i] = self._process_features(features[i])
+            predictions[i] = self._filter_predictions(predictions[i], total_predictions, threshold, first_class, second_class)
+		
         return predictions
 		
 		
