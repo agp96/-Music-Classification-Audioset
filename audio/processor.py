@@ -113,7 +113,7 @@ class WavProcessor(object):
         for i in range(0,int(num_examples/10)):
           #print(int(num_examples/10)+1)
           #print(len(total_predictions))
-          num_10s = num_10s*(i+1)
+          num_10s = 44100*(i+1)
           print(num_10s)
           print(44100*i)
           samples_10seconds = samples[44100*i:num_10s]
