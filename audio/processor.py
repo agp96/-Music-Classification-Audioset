@@ -82,16 +82,17 @@ class WavProcessor(object):
             for row in reader:
                 self._class_map[int(row[0])] = row[2]
 				
-    def get_predictions(self, sample_rate, data, num_predictions, threshold, class_labels):
+    def get_predictions(self, wav_file, sample_rate, data, num_predictions, threshold, class_labels):
         samples = data / 32768.0  # Convert to [-1.0, +1.0]
 		
         examples_batch = vggish.input.waveform_to_examples(samples, sample_rate)
-        features = self._get_features(examples_batch)
-        features2 = self._toCSV(examples_batch)
+        features = self._get_features(examples_batch)¡
         predictions = self._process_features(features)
         #print(predictions)
         #print(predictions[0])
         predictions = self._filter_predictions(predictions, num_predictions, threshold, class_labels)
+		
+        features2 = self._toCSV(wav_file, predictions)
 		
         return predictions
 		
@@ -190,10 +191,12 @@ class WavProcessor(object):
         return postprocessed_batch
 		
 		
-    def _toCSV(self, examples_batch):
-        with open('employee_file.csv', mode='w') as employee_file:
+    def _toCSV(self, wav_file, predictions):
+        with open('predictions.csv', mode='w') as employee_file:
             employee_writer = csv.writer(employee_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            employee_writer.writerow(['John Smith', 'Accounting', 'November'])
+            employee_writer.writerow(['Wav name', 'Seconds', 'Prediction'])
+            for i in range(0,len(predictions)):
+                employee_writer.writerow([wav_file, predictions[i]])
 
 
         return examples_batch

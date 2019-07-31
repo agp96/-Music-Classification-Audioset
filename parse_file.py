@@ -43,7 +43,7 @@ def process_file(wav_file, class_labels, to_csv, ten_seconds, num_predictions, t
         print('Total predicciones ' + str(num_predictions))
         print('Umbral de corte ' + str(threshold))
         if ten_seconds == False:
-          predictions = proc.get_predictions(sr, data, num_predictions, threshold, class_labels)
+          predictions = proc.get_predictions(wav_file, sr, data, num_predictions, threshold, class_labels)
           print('Predictions')
           #print(predictions)
           print(format_predictions(predictions))
