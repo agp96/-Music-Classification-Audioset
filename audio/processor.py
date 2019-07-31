@@ -145,7 +145,7 @@ class WavProcessor(object):
         print(family_list)
         t_mood = np.zeros(shape=(len(family_list)))
         for k in range(0, len(family_list)):
-          t_mood = family_list[k]
+          t_mood[k] = family_list[k]
         print(t_mood)
         #print(predictions)
         total_mood = 0
