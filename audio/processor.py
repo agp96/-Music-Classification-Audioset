@@ -107,6 +107,9 @@ class WavProcessor(object):
 		
         num_examples = len(samples) / 44100
         num_10s = 44100
+        examples_batch = []
+        features = []
+        predictions = []
         for i in range(0,int(num_examples/10)):
           print(10)
           num_10s = num_10s*(i+1)
