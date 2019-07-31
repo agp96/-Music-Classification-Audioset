@@ -82,7 +82,7 @@ class WavProcessor(object):
             for row in reader:
                 self._class_map[int(row[0])] = row[2]
 				
-    def get_predictions(self, sample_rate, data, total_predictions, threshold, first_class, second_class):
+    def get_predictions(self, sample_rate, data, num_predictions, threshold, first_class, second_class):
         samples = data / 32768.0  # Convert to [-1.0, +1.0]
         print(len(data))
         print(data)
@@ -95,11 +95,11 @@ class WavProcessor(object):
         predictions = self._process_features(features)
         #print(predictions)
         print(predictions[0])
-        predictions = self._filter_predictions(predictions, total_predictions, threshold, first_class, second_class)
+        predictions = self._filter_predictions(predictions, num_predictions, threshold, first_class, second_class)
 		
         return predictions
 		
-    def get_predictions2(self, sample_rate, data, total_predictions, threshold, first_class, second_class):
+    def get_predictions2(self, sample_rate, data, num_predictions, threshold, first_class, second_class):
         samples = data / 32768.0  # Convert to [-1.0, +1.0]
         print(len(data))
         print(data)
@@ -109,10 +109,10 @@ class WavProcessor(object):
 		
         num_examples = len(samples) / 44100
         num_10s = 44100
-        pred = []
+        total_predictions = []
         for i in range(0,int(num_examples/10)):
-          print(int(num_examples/10)+1)
-          print(len(pred))
+          #print(int(num_examples/10)+1)
+          #print(len(total_predictions))
           num_10s = num_10s*(i+1)
           samples_10seconds = samples[44100*i:num_10s]
           examples_batch = vggish.input.waveform_to_examples(samples_10seconds, sample_rate)
@@ -120,22 +120,22 @@ class WavProcessor(object):
           predictions = self._process_features(features)
           #print(predictions)
           #print(predictions[0])
-          predictions = self._filter_predictions(predictions, total_predictions, threshold, first_class, second_class)
-          pred.append(predictions)
-          #print(pred[i])
+          predictions = self._filter_predictions(predictions, num_predictions, threshold, first_class, second_class)
+          total_predictions.append(predictions)
+          #print(total_predictions[i])
           if i == int(num_examples/10):
             samples_10seconds = samples[num_10s:len(samples)]
             examples_batch = vggish.input.waveform_to_examples(samples_10seconds, sample_rate)
             features = self._get_features(examples_batch)
             predictions = self._process_features(features)
-            predictions = self._filter_predictions(predictions[0][i], total_predictions, threshold, first_class, second_class)
-            pred.append(predictions)
+            predictions = self._filter_predictions(predictions[0][i], num_predictions, threshold, first_class, second_class)
+            total_predictions.append(predictions)
 		
-        return pred
+        return total_predictions
 		
 		
-    def _filter_predictions(self, predictions, total_predictions, threshold, first_class, second_class):
-        count = total_predictions
+    def _filter_predictions(self, predictions, num_predictions, threshold, first_class, second_class):
+        count = num_predictions
         hit = threshold
 
         top_indices = np.argpartition(predictions[0], -count)[-count:]
