@@ -89,14 +89,12 @@ class WavProcessor(object):
         #print(len(samples))
         #print(samples)
         #print(sample_rate)
-        family_list  = class_labels.split(",")
-        print(family_list)
         examples_batch = vggish.input.waveform_to_examples(samples, sample_rate)
         features = self._get_features(examples_batch)
         predictions = self._process_features(features)
         #print(predictions)
         #print(predictions[0])
-        predictions = self._filter_predictions(predictions, num_predictions, threshold, first_class, second_class)
+        predictions = self._filter_predictions(predictions, num_predictions, threshold, class_labels, first_class, second_class)
 		
         return predictions
 		
@@ -136,12 +134,15 @@ class WavProcessor(object):
         return total_predictions
 		
 		
-    def _filter_predictions(self, predictions, num_predictions, threshold, first_class, second_class):
+    def _filter_predictions(self, predictions, num_predictions, threshold, class_labels, first_class, second_class):
         count = num_predictions
         hit = threshold
 
         top_indices = np.argpartition(predictions[0], -count)[-count:]
         top_mood = np.arange(first_class, second_class)
+        family_list  = class_labels.split(",")
+        print(top_mood)
+        print(family_list)
         #print(predictions)
         total_mood = 0
 		
