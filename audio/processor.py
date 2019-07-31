@@ -84,28 +84,28 @@ class WavProcessor(object):
 				
     def get_predictions(self, sample_rate, data, num_predictions, threshold, first_class, second_class):
         samples = data / 32768.0  # Convert to [-1.0, +1.0]
-        print(len(data))
-        print(data)
-        print(len(samples))
-        print(samples)
-        print(sample_rate)
+        #print(len(data))
+        #print(data)
+        #print(len(samples))
+        #print(samples)
+        #print(sample_rate)
 		
         examples_batch = vggish.input.waveform_to_examples(samples, sample_rate)
         features = self._get_features(examples_batch)
         predictions = self._process_features(features)
         #print(predictions)
-        print(predictions[0])
+        #print(predictions[0])
         predictions = self._filter_predictions(predictions, num_predictions, threshold, first_class, second_class)
 		
         return predictions
 		
     def get_predictions2(self, sample_rate, data, num_predictions, threshold, first_class, second_class):
         samples = data / 32768.0  # Convert to [-1.0, +1.0]
-        print(len(data))
-        print(data)
-        print(len(samples))
-        print(samples)
-        print(sample_rate)
+        #print(len(data))
+        #print(data)
+        #print(len(samples))
+        #print(samples)
+        #print(sample_rate)
 		
         num_examples = len(samples) / 44100
         num_10s = 44100
@@ -164,8 +164,6 @@ class WavProcessor(object):
         #print(self._class_map[280])
         #print(self._class_map[281])
         #print(self._class_map[282])
-        print('Total predicciones ' + str(count))
-        print('Umbral de corte ' + str(hit))
         #print(top_indices)
 		
         line = ((self._class_map[i], float(predictions[0][i])) for

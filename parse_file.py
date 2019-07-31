@@ -40,6 +40,8 @@ def process_file(wav_file, ten_seconds, num_predictions, threshold, first_class,
     from audio.processor import WavProcessor, format_predictions
 
     with WavProcessor() as proc:
+        print('Total predicciones ' + str(num_predictions))
+        print('Umbral de corte ' + str(threshold))
         if ten_seconds == False:
           predictions = proc.get_predictions(sr, data, num_predictions, threshold, first_class, second_class)
           print('Predictions')
