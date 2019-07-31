@@ -48,7 +48,7 @@ def process_file(wav_file, ten_seconds, total_predictions, threshold, first_clas
           predictions = proc.get_predictions2(sr, data, total_predictions, threshold, first_class, second_class)
           for i in range(0, len(predictions)):
             print('Predictions')
-            print(predictions[i])
+            print(predictions[0][i])
             print(format_predictions(predictions[i]))
 
     
