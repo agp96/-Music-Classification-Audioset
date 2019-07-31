@@ -123,6 +123,8 @@ class WavProcessor(object):
           predictions = self._filter_predictions(predictions, num_predictions, threshold, first_class, second_class)
           total_predictions.append(predictions)
           #print(total_predictions[i])
+          print(i)
+          print(int(num_examples/10))
           if i == int(num_examples/10):
             print(total_predictions[i])
             samples_10seconds = samples[num_10s:len(samples)]
