@@ -200,14 +200,14 @@ class WavProcessor(object):
             prediction_writer.writerow([file_name, 0, num_examples, predictions])
 
     def toCSV2(self, data, wav_file, predictions):
-        num_examples = int(len(data) / 441000)
+        num_examples = int(len(data) / 44100)
         file_name = os.path.basename(wav_file)
         with open('predictions.csv', mode='w') as predictions_file:
             prediction_writer = csv.writer(predictions_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             prediction_writer.writerow(['Wav name', 'Start seconds', 'End seconds', 'Prediction'])
             for i in range(0,len(predictions)):
                 start = i*10
-                if i < len(predictions):
+                if i < len(predictions)-1:
                   end = (i+1)*10
                 else:
                   end = num_examples-start
