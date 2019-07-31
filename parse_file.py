@@ -45,10 +45,9 @@ def process_file(wav_file, ten_seconds, total_predictions, threshold, first_clas
           print(format_predictions(predictions))
 			
         else:
-          for i in range(0,int(num_examples/10)):
-            predictions = proc.get_predictions2(sr, data, total_predictions, threshold, first_class, second_class)
-            for i in range(0, len(predictions)):
-              print(format_predictions(predictions[i]))
+          predictions = proc.get_predictions2(sr, data, total_predictions, threshold, first_class, second_class)
+          for i in range(0, len(predictions)):
+            print(format_predictions(predictions[i]))
 
     
 
