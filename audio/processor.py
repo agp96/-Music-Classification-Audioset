@@ -204,8 +204,3 @@ class WavProcessor(object):
             for i in range(0,len(predictions)):
                 prediction_writer.writerow([wav_file, predictions]
             
-
-
-
-		
-		
