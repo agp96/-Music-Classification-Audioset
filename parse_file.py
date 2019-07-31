@@ -48,7 +48,7 @@ def process_file(wav_file, class_labels, to_csv, ten_seconds, num_predictions, t
           #print(predictions)
           print(format_predictions(predictions))
           if to_csv == True:
-            proc.toCSV(wav_file, format_predictions(predictions))
+            proc.toCSV(data, wav_file, format_predictions(predictions))
           
 			
         else:
@@ -58,7 +58,7 @@ def process_file(wav_file, class_labels, to_csv, ten_seconds, num_predictions, t
             #print(predictions[i])
             print(str(i)+' '+format_predictions(predictions[i]))
           if to_csv == True:
-            proc.toCSV2(wav_file, predictions)
+            proc.toCSV2(data, wav_file, predictions)
             
 
     
