@@ -110,7 +110,6 @@ class WavProcessor(object):
         num_examples = len(samples) / 44100
         num_10s = 44100
         pred = []
-        pred.append([])
         for i in range(0,int(num_examples/10)):
           print(int(num_examples/10)+1)
           print(len(pred))
