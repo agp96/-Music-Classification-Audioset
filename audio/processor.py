@@ -90,7 +90,7 @@ class WavProcessor(object):
         #print(samples)
         #print(sample_rate)
         family_list  = class_labels.split(",")
-		print(family_list)
+        print(family_list)
         examples_batch = vggish.input.waveform_to_examples(samples, sample_rate)
         features = self._get_features(examples_batch)
         predictions = self._process_features(features)
