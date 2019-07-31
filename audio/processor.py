@@ -92,7 +92,7 @@ class WavProcessor(object):
         #print(predictions[0])
         predictions = self._filter_predictions(predictions, num_predictions, threshold, class_labels)
 		
-        features2 = self._toCSV(wav_file, predictions)
+        #features2 = self._toCSV(wav_file, predictions)
 		
         return predictions
 		
@@ -191,7 +191,7 @@ class WavProcessor(object):
         return postprocessed_batch
 		
 		
-    def _toCSV(self, wav_file, predictions):
+    def toCSV(self, wav_file, predictions):
         with open('predictions.csv', mode='w') as employee_file:
             employee_writer = csv.writer(employee_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             employee_writer.writerow(['Wav name', 'Seconds', 'Prediction'])
@@ -199,6 +199,6 @@ class WavProcessor(object):
                 employee_writer.writerow([wav_file, predictions[i]])
 
 
-        return examples_batch
+        return predictions
 		
 		

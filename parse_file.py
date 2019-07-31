@@ -47,6 +47,7 @@ def process_file(wav_file, class_labels, to_csv, ten_seconds, num_predictions, t
           print('Predictions')
           #print(predictions)
           print(format_predictions(predictions))
+          predictions = proc.toCSV(wav_file, format_predictions(predictions))
 			
         else:
           predictions = proc.get_predictions2(sr, data, num_predictions, threshold, class_labels)
