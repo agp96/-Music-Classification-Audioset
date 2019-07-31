@@ -192,15 +192,17 @@ class WavProcessor(object):
 		
 		
     def toCSV(self, wav_file, predictions):
+        file_name = os.path.basename(wav_file)
         with open('predictions.csv', mode='w') as predictions_file:
             prediction_writer = csv.writer(predictions_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             prediction_writer.writerow(['Wav name', 'Seconds', 'Prediction'])
-            prediction_writer.writerow([wav_file, predictions])
+            prediction_writer.writerow([file_name, predictions])
 
     def toCSV2(self, wav_file, predictions):
+        file_name = os.path.basename(wav_file)
         with open('predictions.csv', mode='w') as predictions_file:
             prediction_writer = csv.writer(predictions_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             prediction_writer.writerow(['Wav name', 'Seconds', 'Prediction'])
             for i in range(0,len(predictions)):
-                prediction_writer.writerow([wav_file, format_predictions(predictions[i])])
+                prediction_writer.writerow([file_name, format_predictions(predictions[i])])
             
