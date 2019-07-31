@@ -210,7 +210,7 @@ class WavProcessor(object):
                 if i < len(predictions)-1:
                   end = (i+1)*10
                 else:
-                  end = num_examples-start
+                  end = num_examples
                 print(start)
                 print(end)
                 print(num_examples)
