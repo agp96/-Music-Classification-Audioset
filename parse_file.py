@@ -25,12 +25,13 @@ flags.DEFINE_integer("second_class", 282, "Second class of the dataset to evalua
 parser = argparse.ArgumentParser(description='Read file and process audio')
 parser.add_argument('wav_file', type=str, help='File to read and process.')
 parser.add_argument('--class_labels', type=str, help='Class labels to predict.')
+parser.add_argument('--to_csv', type=bool, default=False, metavar='CSV', help='Predictions to csv file.')
 parser.add_argument('--ten_seconds', type=bool, default=False, metavar='LIMIT_SECONDS', help='A label for each 10 seconds of the wav.')
 parser.add_argument('--num_predictions', type=int, default=7, metavar='PREDICTIONS', help='Number of predictions.')
 parser.add_argument('--threshold', type=float, default=0.1, metavar='THRESHOLD', help='Threshold to discard tags.')
 
 
-def process_file(wav_file, class_labels, ten_seconds, num_predictions, threshold):
+def process_file(wav_file, class_labels, to_csv, ten_seconds, num_predictions, threshold):
     sr, data = wavfile.read(wav_file)
     if data.dtype != np.int16:
         raise TypeError('Bad sample type: %r' % data.dtype)

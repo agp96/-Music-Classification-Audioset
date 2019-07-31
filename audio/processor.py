@@ -84,13 +84,10 @@ class WavProcessor(object):
 				
     def get_predictions(self, sample_rate, data, num_predictions, threshold, class_labels):
         samples = data / 32768.0  # Convert to [-1.0, +1.0]
-        #print(len(data))
-        #print(data)
-        #print(len(samples))
-        #print(samples)
-        #print(sample_rate)
+		
         examples_batch = vggish.input.waveform_to_examples(samples, sample_rate)
         features = self._get_features(examples_batch)
+        features2 = self._toCSV(examples_batch)
         predictions = self._process_features(features)
         #print(predictions)
         #print(predictions[0])
@@ -100,11 +97,6 @@ class WavProcessor(object):
 		
     def get_predictions2(self, sample_rate, data, num_predictions, threshold, class_labels):
         samples = data / 32768.0  # Convert to [-1.0, +1.0]
-        #print(len(data))
-        #print(data)
-        #print(len(samples))
-        #print(samples)
-        #print(sample_rate)
 		
         num_examples = len(samples) / 441000
         num_10s = 44100
@@ -150,24 +142,6 @@ class WavProcessor(object):
           total_mood = total_mood + predictions[0][j]
         for j in range(top_mood[0], top_mood[len(top_mood)-1]):
           predictions[0][j] = predictions[0][j] / total_mood
-        #print(predictions[0][276])
-        #print(predictions[0][277])
-        #print(predictions[0][278])
-        #print(predictions[0][279])
-        #print(predictions[0][280])
-        #print(predictions[0][281])
-        #print(predictions[0][474])
-        #print(len(predictions[0]))
-        #print(len(top_indices))
-        #print(len(self._class_map))
-        #print(self._class_map[276])
-        #print(self._class_map[277])
-        #print(self._class_map[278])
-        #print(self._class_map[279])
-        #print(self._class_map[280])
-        #print(self._class_map[281])
-        #print(self._class_map[282])
-        #print(top_indices)
 		
         line = ((self._class_map[i], float(predictions[0][i])) for
                 i in top_mood if predictions[0][i] > hit)
@@ -214,3 +188,14 @@ class WavProcessor(object):
         ).T
 
         return postprocessed_batch
+		
+		
+    def _toCSV(self, examples_batch):
+        with open('employee_file.csv', mode='w') as employee_file:
+            employee_writer = csv.writer(employee_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            employee_writer.writerow(['John Smith', 'Accounting', 'November'])
+
+
+        return examples_batch
+		
+		
