@@ -211,5 +211,8 @@ class WavProcessor(object):
                   end = (i+1)*10
                 else:
                   end = num_examples-start
+                print(start)
+                print(end)
+                print(num_examples)
                 prediction_writer.writerow([file_name, start, end, format_predictions(predictions[i])])
             
