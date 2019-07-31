@@ -28,11 +28,9 @@ parser.add_argument('--class_labels', type=str, help='Class labels to predict.')
 parser.add_argument('--ten_seconds', type=bool, default=False, metavar='LIMIT_SECONDS', help='A label for each 10 seconds of the wav.')
 parser.add_argument('--num_predictions', type=int, default=7, metavar='PREDICTIONS', help='Number of predictions.')
 parser.add_argument('--threshold', type=float, default=0.1, metavar='THRESHOLD', help='Threshold to discard tags.')
-parser.add_argument('--first_class', type=int, default=276, metavar='CLASS', help='Minimum label class.')
-parser.add_argument('--second_class', type=int, default=282, metavar='CLASS', help='Maximum label class.')
 
 
-def process_file(wav_file, class_labels, ten_seconds, num_predictions, threshold, first_class, second_class):
+def process_file(wav_file, class_labels, ten_seconds, num_predictions, threshold):
     sr, data = wavfile.read(wav_file)
     if data.dtype != np.int16:
         raise TypeError('Bad sample type: %r' % data.dtype)
@@ -44,13 +42,13 @@ def process_file(wav_file, class_labels, ten_seconds, num_predictions, threshold
         print('Total predicciones ' + str(num_predictions))
         print('Umbral de corte ' + str(threshold))
         if ten_seconds == False:
-          predictions = proc.get_predictions(sr, data, num_predictions, threshold, class_labels, first_class, second_class)
+          predictions = proc.get_predictions(sr, data, num_predictions, threshold, class_labels)
           print('Predictions')
           #print(predictions)
           print(format_predictions(predictions))
 			
         else:
-          predictions = proc.get_predictions2(sr, data, num_predictions, threshold, first_class, second_class)
+          predictions = proc.get_predictions2(sr, data, num_predictions, threshold, class_labels)
           print('Predictions')
           for i in range(0, len(predictions)):
             #print(predictions[i])

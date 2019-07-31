@@ -82,7 +82,7 @@ class WavProcessor(object):
             for row in reader:
                 self._class_map[int(row[0])] = row[2]
 				
-    def get_predictions(self, sample_rate, data, num_predictions, threshold, class_labels, first_class, second_class):
+    def get_predictions(self, sample_rate, data, num_predictions, threshold, class_labels):
         samples = data / 32768.0  # Convert to [-1.0, +1.0]
         #print(len(data))
         #print(data)
@@ -94,11 +94,11 @@ class WavProcessor(object):
         predictions = self._process_features(features)
         #print(predictions)
         #print(predictions[0])
-        predictions = self._filter_predictions(predictions, num_predictions, threshold, class_labels, first_class, second_class)
+        predictions = self._filter_predictions(predictions, num_predictions, threshold, class_labels)
 		
         return predictions
 		
-    def get_predictions2(self, sample_rate, data, num_predictions, threshold, first_class, second_class):
+    def get_predictions2(self, sample_rate, data, num_predictions, threshold, class_labels):
         samples = data / 32768.0  # Convert to [-1.0, +1.0]
         #print(len(data))
         #print(data)
@@ -119,7 +119,7 @@ class WavProcessor(object):
           predictions = self._process_features(features)
           #print(predictions)
           #print(predictions[0])
-          predictions = self._filter_predictions(predictions, num_predictions, threshold, first_class, second_class)
+          predictions = self._filter_predictions(predictions, num_predictions, threshold, class_labels)
           total_predictions.append(predictions)
           #print(total_predictions[i])
           if i == int(num_examples)-1:
@@ -128,29 +128,25 @@ class WavProcessor(object):
             examples_batch = vggish.input.waveform_to_examples(samples_10seconds, sample_rate)
             features = self._get_features(examples_batch)
             predictions = self._process_features(features)
-            predictions = self._filter_predictions(predictions, num_predictions, threshold, first_class, second_class)
+            predictions = self._filter_predictions(predictions, num_predictions, threshold, class_labels)
             total_predictions.append(predictions)
 		
         return total_predictions
 		
 		
-    def _filter_predictions(self, predictions, num_predictions, threshold, class_labels, first_class, second_class):
+    def _filter_predictions(self, predictions, num_predictions, threshold, class_labels):
         count = num_predictions
         hit = threshold
 
         top_indices = np.argpartition(predictions[0], -count)[-count:]
-        top_mood = np.arange(first_class, second_class)
-        family_list  = class_labels.split(",")
-        print(top_mood)
-        print(family_list)
-        t_mood = np.zeros(shape=(len(family_list)), dtype=int)
-        for k in range(0, len(family_list)):
-          t_mood[k] = family_list[k]
-        print(t_mood)
+        labels  = class_labels.split(",")
+        top_mood = np.zeros(shape=(len(family_list)), dtype=int)
+        for k in range(0, len(labels)):
+          top_mood[k] = labels[k]
         #print(predictions)
-        total_mood = 0
 		
-        for j in range(first_class, second_class):
+        total_mood = 0
+        for j in range(top_mood[0], top_mood[len(top_mood)-1]):
           total_mood = total_mood + predictions[0][j]
         for j in range(first_class, second_class):
           predictions[0][j] = predictions[0][j] / total_mood
