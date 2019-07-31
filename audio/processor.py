@@ -122,7 +122,7 @@ class WavProcessor(object):
           #print(predictions[0])
           predictions = self._filter_predictions(predictions, total_predictions, threshold, first_class, second_class)
           pred.append(predictions[0])
-          print(pred[i])
+          #print(pred[i])
           if i == int(num_examples/10):
             samples_10seconds = samples[num_10s:len(samples)]
             examples_batch = vggish.input.waveform_to_examples(samples_10seconds, sample_rate)
