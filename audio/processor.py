@@ -202,5 +202,5 @@ class WavProcessor(object):
             prediction_writer = csv.writer(predictions_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             prediction_writer.writerow(['Wav name', 'Seconds', 'Prediction'])
             for i in range(0,len(predictions)):
-                prediction_writer.writerow([wav_file, self.format_predictions(predictions[i])])
+                prediction_writer.writerow([wav_file, format_predictions(predictions[i])])
             
