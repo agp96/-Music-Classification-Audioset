@@ -94,6 +94,7 @@ class WavProcessor(object):
         features = self._get_features(examples_batch)
         predictions = self._process_features(features)
         print(predictions)
+        print(predictions[0])
         predictions = self._filter_predictions(predictions, total_predictions, threshold, first_class, second_class)
 		
         return predictions
