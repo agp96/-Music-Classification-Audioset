@@ -16,22 +16,18 @@ import argparse
 import numpy as np
 from tensorflow import flags
 from scipy.io import wavfile
-
-FLAGS = flags.FLAGS
-
-flags.DEFINE_integer("first_class", 276, "First class of the dataset to evaluate.")
-flags.DEFINE_integer("second_class", 282, "Second class of the dataset to evaluate.")
   
 parser = argparse.ArgumentParser(description='Read file and process audio')
 parser.add_argument('wav_file', type=str, help='File to read and process.')
 parser.add_argument('--class_labels', type=str, help='Class labels to predict.')
 parser.add_argument('--to_csv', type=bool, default=False, metavar='CSV', help='Predictions to csv file.')
+parser.add_argument('--output_file', type=str, default=null help='The file to save the predictions to.')
 parser.add_argument('--ten_seconds', type=bool, default=False, metavar='LIMIT_SECONDS', help='A label for each 10 seconds of the wav.')
 parser.add_argument('--num_predictions', type=int, default=7, metavar='PREDICTIONS', help='Number of predictions.')
 parser.add_argument('--threshold', type=float, default=0.1, metavar='THRESHOLD', help='Threshold to discard tags.')
 
 
-def process_file(wav_file, class_labels, to_csv, ten_seconds, num_predictions, threshold):
+def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_predictions, threshold):
     sr, data = wavfile.read(wav_file)
     if data.dtype != np.int16:
         raise TypeError('Bad sample type: %r' % data.dtype)
@@ -48,7 +44,7 @@ def process_file(wav_file, class_labels, to_csv, ten_seconds, num_predictions, t
           #print(predictions)
           print(format_predictions(predictions))
           if to_csv == True:
-            proc.toCSV(data, wav_file, format_predictions(predictions))
+            proc.toCSV(data, wav_file, output_file, format_predictions(predictions))
           
 			
         else:
@@ -58,7 +54,7 @@ def process_file(wav_file, class_labels, to_csv, ten_seconds, num_predictions, t
             #print(predictions[i])
             print(str(i)+' '+format_predictions(predictions[i]))
           if to_csv == True:
-            proc.toCSV2(data, wav_file, predictions)
+            proc.toCSV2(data, wav_file, output_file, predictions)
             
 
     
