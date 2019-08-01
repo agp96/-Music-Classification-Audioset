@@ -30,14 +30,13 @@ parser.add_argument('--threshold', type=float, default=0.1, metavar='THRESHOLD',
 
 def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_predictions, threshold):
     files = gfile.Glob(wav_file)
-    print(len(files))
     if not files:
         raise IOError("Unable to find input files. data_pattern='" +wav_file + "'")
-    logging.info("number of input files: " + str(len(files)))
-    sr, data = wavfile.read(wav_file)
-    sr, data = wavfile.read(wav_file)
-    if data.dtype != np.int16:
-        raise TypeError('Bad sample type: %r' % data.dtype)
+    print(len(files))
+    for i in range(0,len(files)):
+        sr, data = wavfile.read(files[i])
+        if data.dtype != np.int16:
+          raise TypeError('Bad sample type: %r' % data.dtype)
 
     # local import to reduce start-up time
     from audio.processor import WavProcessor, format_predictions
