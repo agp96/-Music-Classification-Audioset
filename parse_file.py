@@ -29,6 +29,7 @@ parser.add_argument('--threshold', type=float, default=0.1, metavar='THRESHOLD',
 
 
 def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_predictions, threshold):
+    print(wav_file)
     files = gfile.Glob(wav_file)
     if not files:
         raise IOError("Unable to find input files. data_pattern='" +wav_file + "'")
