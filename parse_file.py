@@ -38,29 +38,29 @@ def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_p
         if data.dtype != np.int16:
           raise TypeError('Bad sample type: %r' % data.dtype)
 
-    # local import to reduce start-up time
-    from audio.processor import WavProcessor, format_predictions
+        # local import to reduce start-up time
+        from audio.processor import WavProcessor, format_predictions
 
-    with WavProcessor() as proc:
-        print('Total predicciones ' + str(num_predictions))
-        print('Umbral de corte ' + str(threshold))
-        if ten_seconds == False:
-          predictions = proc.get_predictions(wav_file, sr, data, num_predictions, threshold, class_labels)
-          print('Predictions')
-          #print(predictions)
-          print(format_predictions(predictions))
-          if to_csv == True:
-            proc.toCSV(data, wav_file, output_file, format_predictions(predictions))
+        with WavProcessor() as proc:
+          print('Total predicciones ' + str(num_predictions))
+          print('Umbral de corte ' + str(threshold))
+          if ten_seconds == False:
+            predictions = proc.get_predictions(wav_file, sr, data, num_predictions, threshold, class_labels)
+            print('Predictions')
+            #print(predictions)
+            print(format_predictions(predictions))
+            if to_csv == True:
+              proc.toCSV(data, wav_file, output_file, format_predictions(predictions))
           
 			
-        else:
-          predictions = proc.get_predictions2(sr, data, num_predictions, threshold, class_labels)
-          print('Predictions')
-          for i in range(0, len(predictions)):
-            #print(predictions[i])
-            print(str(i)+' '+format_predictions(predictions[i]))
-          if to_csv == True:
-            proc.toCSV2(data, wav_file, output_file, predictions)
+          else:
+            predictions = proc.get_predictions2(sr, data, num_predictions, threshold, class_labels)
+            print('Predictions')
+            for i in range(0, len(predictions)):
+              #print(predictions[i])
+              print(str(i)+' '+format_predictions(predictions[i]))
+            if to_csv == True:
+              proc.toCSV2(data, wav_file, output_file, predictions)
             
 
     
