@@ -36,7 +36,7 @@ def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_p
     print(len(files))
     for i in range(0,len(files)):
         print(files[i])
-        sr, data = wavfile.read(files[i])
+        sr, data = wavfile.read(str(files[i]))
         if data.dtype != np.int16:
           raise TypeError('Bad sample type: %r' % data.dtype)
 
