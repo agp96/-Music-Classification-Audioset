@@ -34,6 +34,7 @@ def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_p
         raise IOError("Unable to find input files. data_pattern='" +wav_file + "'")
     print(len(files))
     for i in range(0,len(files)):
+        print(files[i])
         sr, data = wavfile.read(files[i])
         if data.dtype != np.int16:
           raise TypeError('Bad sample type: %r' % data.dtype)
