@@ -32,7 +32,7 @@ def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_p
     print(wav_file)
     files = tf.io.gfile.glob(wav_file)
     total_predictions = []
-    examples = []¡
+    examples = []
     print('Total predicciones ' + str(num_predictions))
     print('Umbral de corte ' + str(threshold))
     if not files:
