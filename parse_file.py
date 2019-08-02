@@ -14,6 +14,7 @@
 
 import argparse
 import numpy as np
+import tensorflow as tf
 from tensorflow import flags
 from scipy.io import wavfile
   
