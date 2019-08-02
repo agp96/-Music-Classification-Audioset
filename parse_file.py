@@ -29,8 +29,8 @@ parser.add_argument('--threshold', type=float, default=0.1, metavar='THRESHOLD',
 
 
 def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_predictions, threshold):
-    print(wav_file)
-    files = gfile.Glob(wav_file)
+  print(wav_file)
+  files = gfile.Glob(wav_file)
   print(str(files[i]))
   print(''+files[i]+'')
   sr, data = wavfile.read(wav_file)
