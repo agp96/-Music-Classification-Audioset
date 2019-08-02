@@ -31,6 +31,8 @@ parser.add_argument('--threshold', type=float, default=0.1, metavar='THRESHOLD',
 def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_predictions, threshold):
     print(wav_file)
     files = tf.io.gfile.glob(wav_file)
+    total_predictions = []
+    examples = []
     if not files:
         raise IOError("Unable to find input files. data_pattern='" +wav_file + "'")
     print(len(files))
@@ -53,7 +55,8 @@ def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_p
             #print(predictions)
             print(format_predictions(predictions))
             if to_csv == True:
-              proc.toCSV(data, wav_file, output_file, format_predictions(predictions))
+              examples.append(int(len(data) / 44100))
+              total_predictions.append(predictions)
           
 			
           else:
@@ -64,6 +67,15 @@ def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_p
               print(str(i)+' '+format_predictions(predictions[i]))
             if to_csv == True:
               proc.toCSV2(data, wav_file, output_file, predictions)
+			  
+    
+    if to_csv == True:
+        from audio.processor import WavProcessor, format_predictions
+          with WavProcessor() as proc:
+            if ten_seconds == False:
+              proc.toCSV(examples, wav_file, output_file, total_predictions)
+            else:
+              proc.toCSV2(data, wav_file, output_file, format_predictions(predictions))
             
 
     
