@@ -31,40 +31,36 @@ parser.add_argument('--threshold', type=float, default=0.1, metavar='THRESHOLD',
 def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_predictions, threshold):
     print(wav_file)
     files = gfile.Glob(wav_file)
-    if not files:
-        raise IOError("Unable to find input files. data_pattern='" +wav_file + "'")
-    print(len(files))
-    for i in range(0,len(files)):
-        print(str(files[i]))
-        print(''+files[i]+'')
-        sr, data = wavfile.read(wav_file)
-        if data.dtype != np.int16:
-          raise TypeError('Bad sample type: %r' % data.dtype)
+	print(str(files[i]))
+	print(''+files[i]+'')
+	sr, data = wavfile.read(wav_file)
+	if data.dtype != np.int16:
+	  raise TypeError('Bad sample type: %r' % data.dtype)
 
-        # local import to reduce start-up time
-        from audio.processor import WavProcessor, format_predictions
+	# local import to reduce start-up time
+	from audio.processor import WavProcessor, format_predictions
 
-        with WavProcessor() as proc:
-          print('Total predicciones ' + str(num_predictions))
-          print('Umbral de corte ' + str(threshold))
-          if ten_seconds == False:
-            predictions = proc.get_predictions(wav_file, sr, data, num_predictions, threshold, class_labels)
-            print('Predictions')
-            #print(predictions)
-            print(format_predictions(predictions))
-            if to_csv == True:
-              proc.toCSV(data, wav_file, output_file, format_predictions(predictions))
-          
-			
-          else:
-            predictions = proc.get_predictions2(sr, data, num_predictions, threshold, class_labels)
-            print('Predictions')
-            for i in range(0, len(predictions)):
-              #print(predictions[i])
-              print(str(i)+' '+format_predictions(predictions[i]))
-            if to_csv == True:
-              proc.toCSV2(data, wav_file, output_file, predictions)
-            
+	with WavProcessor() as proc:
+	  print('Total predicciones ' + str(num_predictions))
+	  print('Umbral de corte ' + str(threshold))
+	  if ten_seconds == False:
+		predictions = proc.get_predictions(wav_file, sr, data, num_predictions, threshold, class_labels)
+		print('Predictions')
+		#print(predictions)
+		print(format_predictions(predictions))
+		if to_csv == True:
+		  proc.toCSV(data, wav_file, output_file, format_predictions(predictions))
+	  
+		
+	  else:
+		predictions = proc.get_predictions2(sr, data, num_predictions, threshold, class_labels)
+		print('Predictions')
+		for i in range(0, len(predictions)):
+		  #print(predictions[i])
+		  print(str(i)+' '+format_predictions(predictions[i]))
+		if to_csv == True:
+		  proc.toCSV2(data, wav_file, output_file, predictions)
+		
 
     
 
