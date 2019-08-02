@@ -32,7 +32,9 @@ def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_p
     print(wav_file)
     files = tf.io.gfile.glob(wav_file)
     total_predictions = []
-    examples = []
+    examples = []¡
+    print('Total predicciones ' + str(num_predictions))
+    print('Umbral de corte ' + str(threshold))
     if not files:
         raise IOError("Unable to find input files. data_pattern='" +wav_file + "'")
     print(len(files))
@@ -47,8 +49,6 @@ def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_p
         from audio.processor import WavProcessor, format_predictions
 
         with WavProcessor() as proc:
-          print('Total predicciones ' + str(num_predictions))
-          print('Umbral de corte ' + str(threshold))
           if ten_seconds == False:
             predictions = proc.get_predictions(wav_file, sr, data, num_predictions, threshold, class_labels)
             print('Predictions')
@@ -75,7 +75,7 @@ def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_p
           if ten_seconds == False:
             proc.toCSV(examples, wav_file, output_file, total_predictions)
           else:
-            proc.toCSV2(data, wav_file, output_file, format_predictions(predictions))
+            proc.toCSV2(examples, wav_file, output_file, total_predictions)
             
 
     
