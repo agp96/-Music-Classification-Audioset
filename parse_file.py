@@ -71,11 +71,11 @@ def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_p
     
     if to_csv == True:
         from audio.processor import WavProcessor, format_predictions
-          with WavProcessor() as proc:
-            if ten_seconds == False:
-              proc.toCSV(examples, wav_file, output_file, total_predictions)
-            else:
-              proc.toCSV2(data, wav_file, output_file, format_predictions(predictions))
+        with WavProcessor() as proc:
+          if ten_seconds == False:
+            proc.toCSV(examples, wav_file, output_file, total_predictions)
+          else:
+            proc.toCSV2(data, wav_file, output_file, format_predictions(predictions))
             
 
     
