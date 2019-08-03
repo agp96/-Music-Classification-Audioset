@@ -210,10 +210,12 @@ class WavProcessor(object):
             prediction_writer.writerow(['Wav name', 'Start seconds', 'End seconds', 'Prediction'])
             for i in range(0,len(files)):
                 file_name = os.path.basename(files[i])
-                start = i*10
-                if i < len(predictions)-1:
-                  end = (i+1)*10
-                else:
-                  end = num_examples
-                prediction_writer.writerow([file_name, 0, data[i], format_predictions(predictions[i])])
+                for j in range(0,len(predictions[i])):
+                  start = j*10
+                  if j < len(predictions[i])-1:
+                    end = (j+1)*10
+                  else:
+                    end = data[i]
+                  prediction_writer.writerow([file_name, start, end, format_predictions(predictions[i][j])])
+                
             
