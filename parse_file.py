@@ -38,7 +38,7 @@ def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_p
     if not files:
         raise IOError("Unable to find input files. data_pattern='" +wav_file + "'")
     print(len(files))
-    for i in range(0,len(files)):
+    for i in range(0,500):
         print(str(i))
         print(files[i])
         if not files[i]:
