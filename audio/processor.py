@@ -204,6 +204,7 @@ class WavProcessor(object):
     def toCSV2(self, data, wav_file, output_file, predictions):
         files = tf.io.gfile.glob(wav_file)
         file_name = os.path.basename(wav_file)
+        print(predictions[0][0])
         with open(output_file, mode='w') as predictions_file:
             prediction_writer = csv.writer(predictions_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             prediction_writer.writerow(['Wav name', 'Start seconds', 'End seconds', 'Prediction'])
