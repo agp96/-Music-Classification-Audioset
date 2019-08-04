@@ -191,23 +191,23 @@ class WavProcessor(object):
         return postprocessed_batch
 		
 		
-    def toCSV(self, data, wav_file, num_f, output_file, predictions):
+    def toCSV(self, data, wav_file, num_files, output_file, predictions):
         files = tf.io.gfile.glob(wav_file)
         file_name = os.path.basename(wav_file)
         with open(output_file, mode='w') as predictions_file:
             prediction_writer = csv.writer(predictions_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             prediction_writer.writerow(['Wav name', 'Start seconds', 'End seconds', 'Prediction'])
-            for i in range(0, num_f):
+            for i in range(0, num_files):
                 file_name = os.path.basename(files[i])
                 prediction_writer.writerow([file_name, 0, data[i], format_predictions(predictions[i])])
 
-    def toCSV2(self, data, wav_file, num_f, output_file, predictions):
+    def toCSV2(self, data, wav_file, num_files, output_file, predictions):
         files = tf.io.gfile.glob(wav_file)
         file_name = os.path.basename(wav_file)
         with open(output_file, mode='w') as predictions_file:
             prediction_writer = csv.writer(predictions_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             prediction_writer.writerow(['Wav name', 'Start seconds', 'End seconds', 'Prediction'])
-            for i in range(0,num_f):
+            for i in range(0,num_files):
                 file_name = os.path.basename(files[i])
                 for j in range(0,len(predictions[i])):
                   start = j*10

@@ -79,9 +79,9 @@ def process_file(wav_file, class_labels, to_csv, num_files, output_file, ten_sec
         from audio.processor import WavProcessor, format_predictions
         with WavProcessor() as proc:
           if ten_seconds == False:
-            proc.toCSV(examples, wav_file, num_f, output_file, total_predictions)
+            proc.toCSV(examples, wav_file, num_files, output_file, total_predictions)
           else:
-            proc.toCSV2(examples, wav_file, num_f, output_file, total_predictions)
+            proc.toCSV2(examples, wav_file, num_files, output_file, total_predictions)
             
 
     
