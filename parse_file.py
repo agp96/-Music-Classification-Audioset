@@ -34,6 +34,7 @@ def process_file(wav_file, class_labels, to_csv, num_files, output_file, ten_sec
     files = tf.io.gfile.glob(wav_file)
     total_predictions = []
     examples = []
+    num_f == 0
     print('Total predicciones ' + str(num_predictions))
     print('Umbral de corte ' + str(threshold))
     if not files:
