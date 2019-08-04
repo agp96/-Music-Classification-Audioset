@@ -22,13 +22,14 @@ parser = argparse.ArgumentParser(description='Read file and process audio')
 parser.add_argument('wav_file', type=str, help='File to read and process.')
 parser.add_argument('--class_labels', type=str, default='276,277,278,279,280,281,282', help='Class labels to predict.')
 parser.add_argument('--to_csv', type=bool, default=False, metavar='CSV', help='Predictions to csv file.')
+parser.add_argument('--num_files', type=int, default='0', help='The number of files to predict.')
 parser.add_argument('--output_file', type=str, default='predictions.csv', help='The file to save the predictions to.')
 parser.add_argument('--ten_seconds', type=bool, default=False, metavar='LIMIT_SECONDS', help='A label for each 10 seconds of the wav.')
 parser.add_argument('--num_predictions', type=int, default=7, metavar='PREDICTIONS', help='Number of predictions.')
 parser.add_argument('--threshold', type=float, default=0.1, metavar='THRESHOLD', help='Threshold to discard tags.')
 
 
-def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_predictions, threshold):
+def process_file(wav_file, class_labels, to_csv, num_files, output_file, ten_seconds, num_predictions, threshold):
     print(wav_file)
     files = tf.io.gfile.glob(wav_file)
     total_predictions = []
@@ -37,8 +38,12 @@ def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_p
     print('Umbral de corte ' + str(threshold))
     if not files:
         raise IOError("Unable to find input files. data_pattern='" +wav_file + "'")
+    if num_files == 0:
+        num_f == len(files)
+    else:
+        num_f == num_files
     print(len(files))
-    for i in range(0,200):
+    for i in range(0,num_f):
         print(str(i))
         print(files[i])
         if not files[i]:
@@ -76,9 +81,9 @@ def process_file(wav_file, class_labels, to_csv, output_file, ten_seconds, num_p
         from audio.processor import WavProcessor, format_predictions
         with WavProcessor() as proc:
           if ten_seconds == False:
-            proc.toCSV(examples, wav_file, output_file, total_predictions)
+            proc.toCSV(examples, wav_file, num_f, output_file, total_predictions)
           else:
-            proc.toCSV2(examples, wav_file, output_file, total_predictions)
+            proc.toCSV2(examples, wav_file, num_f, output_file, total_predictions)
             
 
     
