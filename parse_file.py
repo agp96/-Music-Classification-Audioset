@@ -34,16 +34,14 @@ def process_file(wav_file, class_labels, to_csv, num_files, output_file, ten_sec
     files = tf.io.gfile.glob(wav_file)
     total_predictions = []
     examples = []
-    num_f == 0
     print('Total predicciones ' + str(num_predictions))
     print('Umbral de corte ' + str(threshold))
     if not files:
         raise IOError("Unable to find input files. data_pattern='" +wav_file + "'")
-    num_f == len(files)
     if num_files == 0:
-        num_f == num_files
+        num_files == len(files)
     print(len(files))
-    for i in range(0,num_f):
+    for i in range(0,num_files):
         print(str(i))
         print(files[i])
         if not files[i]:
