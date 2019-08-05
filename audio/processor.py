@@ -134,9 +134,7 @@ class WavProcessor(object):
         top_indices = np.argpartition(predictions[0], -count)[-count:]
         labels  = class_labels.split(",")
         top_mood = np.zeros(shape=(len(labels)), dtype=int)
-        print(top_mood)
-        print(class_labels)
-        print(labels)
+		
         for k in range(0, len(labels)):
           top_mood[k] = labels[k]
         #print(predictions)

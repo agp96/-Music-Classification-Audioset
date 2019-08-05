@@ -41,8 +41,6 @@ def process_file(wav_file, class_labels, to_csv, num_files, output_file, ten_sec
     if num_files == 0:
         num_files = len(files)
     for i in range(0,num_files):
-        print(str(i))
-        print(files[i])
         if not files[i]:
           i = i+1
         sr, data = wavfile.read(files[i])
