@@ -38,6 +38,7 @@ def process_file(wav_file, class_labels, to_csv, num_files, output_file, ten_sec
     print('Umbral de corte ' + str(threshold))
     if not files:
         raise IOError("Unable to find input files. data_pattern='" +wav_file + "'")
+    print(num_files)
     if num_files == 0:
         num_files == len(files)
     print(num_files)
