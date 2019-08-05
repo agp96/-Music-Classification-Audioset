@@ -137,7 +137,7 @@ class WavProcessor(object):
 		
         for k in range(0, len(labels)):
           top_mood[k] = labels[k]
-          print(top_mood[k])
+          #print(top_mood[k])
         #print(top_mood)
         #print(len(top_mood))
 		
