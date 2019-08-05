@@ -150,6 +150,8 @@ class WavProcessor(object):
         for j in range(0, 7):
           predictions[0][j] = predictions[0][j] / total_mood
           print(predictions[0][j])
+        print(total_mood)
+        print(predictions[0])
 		
         line = ((self._class_map[i], float(predictions[0][i])) for
                 i in top_mood if predictions[0][i] > hit)
