@@ -144,11 +144,11 @@ class WavProcessor(object):
         print(len(top_mood))
 		
         total_mood = 0
-        for j in range(top_mood[0], top_mood[len(top_mood)-1]):
+        for j in range(top_mood[0], top_mood[len(top_mood)-1]+1):
           total_mood = total_mood + predictions[0][j]
           print(j)
         
-        for j in range(top_mood[0], top_mood[len(top_mood)]):
+        for j in range(top_mood[0], top_mood[len(top_mood)]-1]+1):
           predictions[0][j] = predictions[0][j] / total_mood
           print(j)
 		
