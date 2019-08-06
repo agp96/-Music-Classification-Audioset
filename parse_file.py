@@ -47,6 +47,8 @@ def process_file(wav_file, class_labels, to_csv, num_files, output_file, ten_sec
         if data.dtype != np.int16:
           raise TypeError('Bad sample type: %r' % data.dtype)
 
+        print(i)
+		
         # local import to reduce start-up time
         from audio.processor import WavProcessor, format_predictions
 
