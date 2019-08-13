@@ -147,7 +147,7 @@ class WavProcessor(object):
           total_mood = total_mood + predictions[0][j]
           #print(j)
         pred = (1,527)
-        pre = np.zeros(1,527)
+        pre = np.zeros((1,527))
         print(predictions[0])
         print(pre[0])
         print(predictions[0][0])
