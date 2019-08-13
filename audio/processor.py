@@ -156,9 +156,12 @@ class WavProcessor(object):
         if count < len(top_mood):
           top_indices = np.argpartition(top_mood, -count)[-count:]
 		  
+        print(top_indices)
+        print(len(top_indices))
+        print(top_indices[0])
         line = ((self._class_map[i], float(predictions[0][i])) for
                 i in top_indices if predictions[0][i] > hit)
-        #print(line)
+        print(line)
         return sorted(line, key=lambda p: -p[1])
 
     def _process_features(self, features):
