@@ -154,7 +154,7 @@ class WavProcessor(object):
         top_indices = top_mood
 		
         if count < len(top_mood):
-          top_indices = np.argpartition(top_mood[0], -count)[-count:]
+          top_indices = np.argpartition(top_mood, -count)[-count:]
 		  
         line = ((self._class_map[i], float(predictions[0][i])) for
                 i in top_indices if predictions[0][i] > hit)
