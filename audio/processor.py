@@ -92,6 +92,7 @@ class WavProcessor(object):
         #print(predictions[0])
         predictions = self._filter_predictions(predictions, num_predictions, threshold, class_labels)
 		
+        print(predictions)
         #features2 = self._toCSV(wav_file, predictions)
 		
         return predictions
@@ -156,16 +157,9 @@ class WavProcessor(object):
 		
         top_indices = top_mood
 		
-        print(top_indices)
-        print(len(top_indices))
-        print(top_indices[0])
-		
         if count < len(top_mood):
           top_indices = np.argpartition(pred[0], -count)[-count:]
 		  
-        print(top_indices)
-        print(len(top_indices))
-        print(top_indices[0])
         line = ((self._class_map[i], float(predictions[0][i])) for
                 i in top_indices if predictions[0][i] > hit)
         print(sorted(line, key=lambda p: -p[1]))
