@@ -92,7 +92,6 @@ class WavProcessor(object):
         #print(predictions[0])
         predictions = self._filter_predictions(predictions, num_predictions, threshold, class_labels)
 		
-        print(predictions)
         #features2 = self._toCSV(wav_file, predictions)
 		
         return predictions
