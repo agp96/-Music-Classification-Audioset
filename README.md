@@ -29,7 +29,7 @@ python parse_file.py path_to_your_file.wav
 ```
 _Note: file should have 16000 rate_
 
-###### Features added
+#### Features added
 
 If you want to choose which labels you want to be used to predict, you can add --class_labels, for example --class_label='0,137' to predict Speech or Music. 
 
