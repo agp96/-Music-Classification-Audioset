@@ -39,8 +39,17 @@ Also the audio file can be divided into 10 seconds, obtaining a label for each s
 
 The results of the predictions will be displayed on the console, and for convenience they can be exported to csv. With --to_csv=True to active it and if you want to save in a specific file with --output_file.
 
+Example with the previous features added.
+
+```bash
+python parse_file.py "../gdrive/My Drive/example.wav" --class_labels='0,137' --num_predictions=2 --threshold=0.5 --ten_seconds=True --to_csv=True --output_file='../gdrive/My Drive/predictions.csv' 
+```
+
 In case of a large number of files to predict, a number of audios can be bounded with --num_files, the default value is 0 which means that it analyzes all files.
 
+```bash
+python parse_file.py "../gdrive/My Drive/PC_VideoGame_Music/*.wav" --class_labels='276,277,278,279,280,281,282' --num_predictions=7 --threshold=0.15 --ten_seconds=True --to_csv=True --output_file='../gdrive/My Drive/predictions.csv' --num_files=500
+```
 
 #### To capture and process audio from mic
 run
