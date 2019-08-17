@@ -1,6 +1,6 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)](LICENSE)
 
-# Devicehive Audio Analysis
+# Music Clasification Audioset
 Audio classification feature demo\
 Detailed description can be found [here](https://www.iotforall.com/tensorflow-sound-classification-machine-learning-applications/)
 
@@ -28,6 +28,19 @@ run
 python parse_file.py path_to_your_file.wav
 ```
 _Note: file should have 16000 rate_
+
+#### Features added
+
+If you want to choose which labels you want to be used to predict, you can add --class_labels, for example --class_label='0,137' to predict Speech or Music. 
+
+You can also change the number of predictions you want to display, --num_predictions with 7 as default, and the threshold, -threshold with 0.1 as default.
+
+Also the audio file can be divided into 10 seconds, obtaining a label for each segment, --ten_seconds=True to activate it.
+
+The results of the predictions will be displayed on the console, and for convenience they can be exported to csv. With --to_csv=True to active it and if you want to save in a specific file with --output_file.
+
+In case of a large number of files to predict, a number of audios can be bounded with --num_files, the default value is 0 which means that it analyzes all files.
+
 
 #### To capture and process audio from mic
 run
